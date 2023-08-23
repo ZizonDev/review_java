@@ -6,7 +6,7 @@ import java.util.Scanner;
     2023.08.21
 
     [문제]
-    이름, 주소, 성별, 나이를 포함하는 회원 정보 출력하기
+    이름, 주소, 성별, 나이를 포함하는 회원 정보 출력하기.
  */
 public class ScannerClass {
     public static void main(String[] args) {
