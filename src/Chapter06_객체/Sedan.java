@@ -15,6 +15,9 @@ public class Sedan extends Car {
         tankSize = 45;
         seats = 4;
         this.name = name;
+    }
+    @Override
+    void setOption(boolean isOption) {
         if(isOption) seats += 1;
     }
 }

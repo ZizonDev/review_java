@@ -15,6 +15,9 @@ public class Bus extends Car {
         tankSize = 100;
         seats = 20;
         this.name = name;
+    }
+    @Override
+    void setOption(boolean isOption) {
         if(isOption) tankSize += 30;
     }
 }

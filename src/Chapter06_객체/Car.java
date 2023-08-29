@@ -17,7 +17,7 @@ package Chapter06_객체;
     - 이동 시간은 차량의 최고속도 기준으로 계산 합니다.
  */
 
-public class Car {
+public abstract class Car {
     protected String name;
     protected int speed;
     protected int fuelEff;
@@ -25,38 +25,30 @@ public class Car {
     protected int seats;
     protected boolean isOption;
 
-    void setOption(boolean isOption) {
-        this.isOption = isOption;
-    }
-
-    public int moveCnt(int passengerCnt) {
-        int moveCnt;
-        if(passengerCnt % seats == 0) {moveCnt = passengerCnt / seats;}
-        else {moveCnt = passengerCnt / seats + 1;}
-        return moveCnt;
-    }
-    public int oilCnt(int distance, int moveCnt) {
-        int oilCnt;
-        if (distance * moveCnt % fuelEff == 0) oilCnt = distance * moveCnt % fuelEff;
-        else oilCnt = distance * moveCnt % fuelEff + 1;
-        return oilCnt;
-    }
-    public int totalCost(int oilCnt) {
-        int totalCost = oilCnt * 2000;
-        return totalCost;
-    }
-    public int totalTime(int distance, int moveCnt, int speed) {
-        int totalTime = distance * moveCnt / speed * 60;
-        int time = totalTime / 60;
-        int minute = totalTime % 60;
-        System.out.printf("%d시간 %d분", time, minute);
-        return totalTime;
-    }
+    abstract void setOption(boolean isOption);
     public String getName() {
-        this.name = name;
         return name;
     }
-    public int getSpeed() {
-        return speed;
+    public int totalCost(int distance, int moveCount) {
+        int totalCost = distance * moveCount / fuelEff * 2000;
+        return totalCost;
+    }
+    public int totalOilCount(int distance, int moveCount) {
+        if ((distance * moveCount / fuelEff) % tankSize == 0)
+            return (distance * moveCount / fuelEff) % tankSize;
+        else return (distance * moveCount / fuelEff) % tankSize + 1;
+    }
+    public int moveCount(int passengerCount) {
+        if (passengerCount % seats == 0) return passengerCount / seats;
+        else return passengerCount / seats + 1;
+    }
+    public String totalTime(int distance, int moveCount) {
+        double totalTime = (double)(distance * moveCount) / speed;
+        int getIntTime = (int)(totalTime * 60);
+        int hour = getIntTime / 60;
+        int minute = getIntTime % 60;
+        return String.format("%d시간 %d분", hour, minute);
     }
 }
+
+

@@ -15,6 +15,9 @@ public class SportsCar extends Car {
         tankSize = 30;
         seats = 2;
         this.name = name;
-        if(isOption) speed += 1.2;
+    }
+        @Override
+        void setOption(boolean isOption) {
+        if(isOption) speed *= 1.2;
     }
 }

@@ -24,7 +24,7 @@ import java.util.Scanner;
 public class MakeCarMain {
     public static void main(String[] args) {
         int[] city = {400, 150, 200, 300};
-        Car car = new Car();
+        Car car = null;
         Scanner sc = new Scanner(System.in);
         System.out.print("이동 지역 선택 [1]부산 [2]대전 [3]강릉 [4] 광주 : ");
         int cityNum = sc.nextInt();
@@ -34,7 +34,7 @@ public class MakeCarMain {
         int carNum = sc.nextInt();
         System.out.print("부가 기능 [1]ON [2]OFF : ");
         int option = sc.nextInt();
-        boolean isOption = (option == 1) ? true : false;
+        boolean isOption = option == 1;
 
         switch(carNum) {
             case 1 : car = new SportsCar("Porsche 911"); break;
@@ -42,12 +42,11 @@ public class MakeCarMain {
             case 3 : car = new Bus("Express Bus"); break;
         }
         car.setOption(isOption);
-        int moveCount = car.moveCnt(passengerCount);
-        int oilCount = car.oilCnt(city[cityNum-1], moveCount);
+        int moveCount = car.moveCount(passengerCount);
 
         System.out.println("=".repeat(10) + car.getName() + "=".repeat(10));
-        System.out.println("총 비용 : " + car.totalCost(oilCount) + "원");
-        System.out.println("총 주유 횟수 : " + oilCount + "회");
-        System.out.println("총 이동 시간 : " + car.totalTime(city[cityNum - 1], moveCount, car.getSpeed()));
+        System.out.println("총 비용 : " + car.totalCost(city[cityNum-1], moveCount) + "원");
+        System.out.println("총 주유 횟수 : " + car.totalOilCount(city[cityNum-1], moveCount) + "회");
+        System.out.println("총 이동 시간 : " + car.totalTime(city[cityNum - 1], moveCount));
     }
 }
